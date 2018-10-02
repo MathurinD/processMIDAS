@@ -1,10 +1,16 @@
-#' @import STASNet
+#################### processControls ##########################
+# Functions related to the definition of controls in the data and normalisation
 
-#' normaliseByControls normalises all values by the respective control and renames the ID:type column of a midas file corresponding to control treatment
+#' @import STASNet
+verbose = 2
+
+#' Normalise by a control condition
+#'
+#' Normalise all values by the respective control and renames the ID:type column of a midas file corresponding to control treatment
 #' @param midas_file A MIDAS matrix or filename, or a vector of filenames
 #' @param control_condition A string depicting the control condition. Each control treatment has to be separated by a '+'.
 #' @param save_file Whether the resulting MIDAS matrix should be saved in a file
-#' @example normaliseByControls("blunt_MIDAS.csv", "BSA+DMSO") # BSA and DMSO are the controls used for the inhibitors and ligands respectively
+#' @examples normaliseByControls("blunt_MIDAS.csv", "BSA+DMSO") # BSA and DMSO are the controls used for the inhibitors and ligands respectively
 #' @export
 normaliseByControls <- function(midas_file, control_condition, save_file=FALSE) {
 # TODO: if several MIDAS files are provided, normalise by the mean of all the common treatments (more robust normalisation method) (and merge them?)
@@ -41,7 +47,7 @@ normaliseByControls <- function(midas_file, control_condition, save_file=FALSE) 
 #' @param midas_file A MIDAS matrix or filename, or a vector of filenames
 #' @param control_condition A string depicting the control condition. Each control treatment has to be separated by a '+'.
 #' @param save_file Whether the resulting MIDAS matrix should be saved in a file
-#' @example defineControls("blunt_MIDAS.csv", "BSA+DMSO")
+#' @examples defineControls("blunt_MIDAS.csv", "BSA+DMSO")
 #' @export
 defineControls <- function(midas_file, control_condition, save_file=FALSE) {
     pipeline = FALSE
