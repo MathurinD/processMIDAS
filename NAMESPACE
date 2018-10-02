@@ -3,4 +3,5 @@
 export(defineControls)
 export(filterMIDAS)
 export(normaliseByControls)
+export(subsetMIDAS)
 import(STASNet)
