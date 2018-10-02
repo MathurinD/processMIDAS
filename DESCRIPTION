@@ -1,9 +1,11 @@
 Package: processMIDAS
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Encoding: UTF-8
+Title: Make working with MIDAS format easier
+Version: 0.1
 Date: 2018-10-02
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Mathurin Dorel
+Maintainer: Mathurin Dorel <mathurin.dorel@charite.de>
+Description: Provides several functions to process MIDAS files such as adding/deleting columns or entries, merging MIDAS files, specifying controls, etc.
+License: GPLv3
+RoxygenNote: 6.1.0
