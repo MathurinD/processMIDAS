@@ -60,7 +60,7 @@ mergeMIDAS <- function(..., save_file=FALSE) {
     dir.create(save_dir, FALSE)
     save_name = paste0(save_dir, "/", "merged_", basename(mfiles[1])) # TODO extra filter for commun names
     if (save_file) {
-        write.csv(save_midas, file="", quote=FALSE, row.names=FALSE)
+        write.csv(save_midas, file=save_name, quote=FALSE, row.names=FALSE)
     }
     return(save_midas)
 }

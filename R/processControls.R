@@ -34,7 +34,7 @@ normaliseByControls <- function(midas_file, control_condition, save_file=FALSE) 
         save_name = gsub("blunt_", "", save_name) # The file won't be blunt anymore
         output_names = c(output_names, save_name)
         if (save_file) {
-            write.csv(save_midas, file="", quote=FALSE, row.names=FALSE)
+            write.csv(save_midas, file=save_name, quote=FALSE, row.names=FALSE)
         }
     }
     return(save_midas)
@@ -65,7 +65,7 @@ defineControls <- function(midas_file, control_condition, save_file=FALSE) {
         save_name = gsub("blunt_", "", save_name) # The file won't be blunt anymore
         output_names = c(output_names, save_name)
         if (save_file) {
-            write.csv(save_midas, file="", quote=FALSE, row.names=FALSE)
+            write.csv(save_midas, file=save_name, quote=FALSE, row.names=FALSE)
         }
     }
     return(save_midas)
