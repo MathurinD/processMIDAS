@@ -6,7 +6,7 @@
 #' @param midas_file A MIDAS matrix or filename
 #' @param filters A list of filters. A filter is of the form READOUT, PERT which means that the entries for PERT or READOUT are removed, or of the form READOUT@PERT, in which case the entries for READOUT when perturbation PERT is present are removed
 #' @param save_file Whether the resulting MIDAS matrix should be saved in a file
-#' @examples filterMIDAS blunt_MIDAS.csv AKT@AKTi
+#' @examples filterMIDAS("blunt_MIDAS.csv", c("AKT@AKTi", "p90RSK")
 #' @export
 #' @seealso extractMIDAS, defineControls
 #' NOTE: this script assumes that perturbation and readout names are distinct
@@ -54,7 +54,7 @@ filterMIDAS <- function(midas_file, filters, save_file=FALSE) {
     } else {
         save_midas = midas_file
     }
-    output_name = gsub("MIDAS", paste0("filter_", paste0(cargs[-1], collapse="-"), "_MIDAS"), cargs[1])
+    output_name = gsub("MIDAS", paste0("filter_", paste0(filters, collapse="-"), "_MIDAS"), midas_file)
     output_name = gsub("blunt_", "", output_name) # The file won't be blunt anymore
     if (save_file) {
         write.csv(save_midas, file="", quote=FALSE, row.names=FALSE)

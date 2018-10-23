@@ -2,6 +2,7 @@
 
 export(defineControls)
 export(filterMIDAS)
+export(mergeMIDAS)
 export(normaliseByControls)
 export(subsetMIDAS)
 import(STASNet)
