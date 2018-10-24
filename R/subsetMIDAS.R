@@ -3,10 +3,11 @@
 #' Create new MIDAS files from a subset of lines of an existing MIDAS file
 #' @param midas_file A MIDAS matrix or filename
 #' @param subsets A vector of column name from the MIDAS 'TR:' fields. A '!' before the string means that the rows without this field will be included.
+#' @param remove_columns Whether the columns corresponding the subsets should be removed in the final MIDAS files
 #' @param save_file Whether the resulting MIDAS matrix should be saved in a file
 #' @examples subsetMIDAS("blunt_MIDAS.csv", c("parental", "shp2ko"))
 #' @export
-subsetMIDAS <- function(midas_file, subsets, save_file=FALSE) {
+subsetMIDAS <- function(midas_file, subsets, remove_columns=TRUE, save_file=FALSE) {
     library(STASNet)
     output_names = c()
 
@@ -20,7 +21,11 @@ subsetMIDAS <- function(midas_file, subsets, save_file=FALSE) {
         }
         selection = which(colnames(midas_file) == paste0("TR.", item))
         blank_control = grepl("^(blank|c|control)$", midas_file[,"ID.type"])
-        save_midas = midas_file[blank_control | midas_file[,selection]==choice,-selection]
+        if (remove_columns) {
+            save_midas = midas_file[blank_control | midas_file[,selection]==choice,-selection]
+        } else {
+            save_midas = midas_file[blank_control | midas_file[,selection]==choice,]
+        }
 
         save_name = gsub("MIDAS", paste0(ifelse(choice==0, "no-", ""), item, "_MIDAS"), midas_file)
         if (save_file) {
