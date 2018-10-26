@@ -19,13 +19,18 @@ normaliseByControls <- function(midas_file, control_condition, save_file=FALSE) 
     output_names = c()
 
     midas_file = extractMIDAS(midas_file)
-    scols = which(colnames(midas_file) %in% paste0("TR.", controls))
-    control_lines = sapply(1:nrow(midas_file), function(rr) { all(midas_file[rr,scols]==1) })
-    save_midas = midas_file[,-scols]
+    if (length(controls) == 1 && controls=="") {
+        # special case where the control corresponds to no treatment
+        control_lines = sapply(1:nrow(midas_file), function(rr) { all(midas_file[rr,grepl("^TR.", colnames(midas_file))]==0) })
+    } else {
+        scols = which(colnames(midas_file) %in% paste0("TR.", controls))
+        control_lines = sapply(1:nrow(midas_file), function(rr) { all(midas_file[rr,scols]==1) })
+        save_midas = midas_file[,-scols]
+    }
     save_midas$ID.type = as.character(save_midas$ID.type)
     save_midas[control_lines, "ID.type"] = "control"
     dv_cols = colnames(save_midas)[grepl("^DV.", colnames(save_midas))]
-    mean_controls = colMeans(save_midas[control_lines, dv_cols])
+    mean_controls = colMeans(save_midas[control_lines, dv_cols], na.rm=TRUE)
     save_midas[control_lines, dv_cols] = sapply(dv_cols, function(xx) { save_midas[control_lines,xx]/mean_controls[xx] })
     save_midas[!control_lines, dv_cols] = sapply(dv_cols, function(xx) { save_midas[!control_lines,xx]/mean_controls[xx] })
 
