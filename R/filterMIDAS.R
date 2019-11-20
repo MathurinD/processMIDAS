@@ -43,13 +43,13 @@ filterMIDAS <- function(midas_file, filters, save_file=FALSE) {
             message(paste("'", filter, "' could not be identified as a perturbation or readout"))
         }
     }
-    if (length(remove_cols) > 1) {
-        if (length(remove_rows) > 1) {
+    if (length(remove_cols) >= 1) {
+        if (length(remove_rows) >= 1) {
             save_midas = midas_file[-remove_rows,-remove_cols]
         } else {
             save_midas = midas_file[,-remove_cols]
         }
-    } else if (length(remove_rows) > 1) {
+    } else if (length(remove_rows) >= 1) {
             save_midas = midas_file[-remove_rows,]
     } else {
         save_midas = midas_file
