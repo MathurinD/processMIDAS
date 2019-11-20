@@ -20,7 +20,7 @@ subsetMIDAS <- function(midas_file, subsets, remove_columns=TRUE, save_file=FALS
             item = substr(item, 2, 1000)
         }
         selection = which(colnames(midas_file) == paste0("TR.", item))
-        blank_control = grepl("^(blank|c|control)$", midas_file[,"ID.type"])
+        blank_control = grepl("^(blank|c|control|norm)$", midas_file[,"ID.type"])
         if (remove_columns) {
             save_midas = midas_file[blank_control | midas_file[,selection]==choice,-selection]
         } else {

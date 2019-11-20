@@ -70,3 +70,13 @@ defineControls <- function(midas_file, control_condition, save_file=FALSE) {
     }
     return(save_midas)
 }
+
+#' Scale values to compare different measurements
+#'
+#' Scale all value between 2 controls of known values so that samples measured separately can be compared.
+#' @param midas_file A MIDAS matrix or filename
+#' @param positive_control The control where high values are expected
+#' @param negative_control The control where low values are expected. If negative_control=='' the values are simply scale by the positive_control alone.
+#' @param restrict_readouts Only the corresponding subset of readout should be modified with these controls
+scaleBy2controls <- function(midas_file, positive_control="BioRad_EGF", negative_control="BioRad_phosphatase", restrict_readouts = c()) {
+}
