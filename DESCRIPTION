@@ -8,4 +8,4 @@ Author: Mathurin Dorel
 Maintainer: Mathurin Dorel <mathurin.dorel@charite.de>
 Description: Provides several functions to process MIDAS files such as adding/deleting columns or entries, merging MIDAS files, specifying controls, etc.
 License: GPLv3
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2

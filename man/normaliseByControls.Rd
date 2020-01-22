@@ -7,7 +7,7 @@
 normaliseByControls(midas_file, control_condition, save_file = FALSE)
 }
 \arguments{
-\item{midas_file}{A MIDAS matrix or filename, or a vector of filenames}
+\item{midas_file}{A MIDAS matrix or filename}
 
 \item{control_condition}{A string depicting the control condition. Each control treatment has to be separated by a '+'.}
 

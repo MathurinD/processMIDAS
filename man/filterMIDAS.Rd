@@ -17,7 +17,7 @@ filterMIDAS(midas_file, filters, save_file = FALSE)
 Filter out some entries from a MIDAS file by setting them to NA
 }
 \examples{
-filterMIDAS blunt_MIDAS.csv AKT@AKTi
+filterMIDAS("blunt_MIDAS.csv", c("AKT@AKTi", "p90RSK")
 }
 \seealso{
 extractMIDAS, defineControls
