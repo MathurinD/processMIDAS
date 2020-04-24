@@ -5,9 +5,10 @@
 #' @param subsets A vector of column name from the MIDAS 'TR:' fields. A '!' before the string means that the rows without this field will be included.
 #' @param remove_columns Whether the columns corresponding the subsets should be removed in the final MIDAS files
 #' @param save_file Whether the resulting MIDAS matrix should be saved in a file
+#' @param filter_controls Whether the control lines should be filtered. Should be TRUE when filtering for cell lines but FALSE when filtering for conditions.
 #' @examples subsetMIDAS("blunt_MIDAS.csv", c("parental", "shp2ko"))
 #' @export
-subsetMIDAS <- function(midas_file, subsets, remove_columns=TRUE, save_file=FALSE) {
+subsetMIDAS <- function(midas_file, subsets, remove_columns=TRUE, save_file=FALSE, filter_controls=FALSE) {
     library(STASNet)
     output_names = c()
 
@@ -20,11 +21,17 @@ subsetMIDAS <- function(midas_file, subsets, remove_columns=TRUE, save_file=FALS
             item = substr(item, 2, 1000)
         }
         selection = which(colnames(midas_file) == paste0("TR.", item))
-        blank_control = grepl("^(blank|c|control|norm)$", midas_file[,"ID.type"])
-        if (remove_columns) {
-            save_midas = midas_file[blank_control | midas_file[,selection]==choice,-selection]
+        blank_rows = grepl("^(blank)$", midas_file[,"ID.type"])
+        control_rows = grepl("^(c|control|norm)$", midas_file[,"ID.type"])
+        if (filter_controls) {
+            protected_rows = blank_rows
         } else {
-            save_midas = midas_file[blank_control | midas_file[,selection]==choice,]
+            protected_rows = blank_rows | control_rows
+        }
+        if (remove_columns) {
+            save_midas = midas_file[protected_rows | midas_file[,selection]==choice,-selection]
+        } else {
+            save_midas = midas_file[protected_rows | midas_file[,selection]==choice,]
         }
 
         save_name = gsub("MIDAS", paste0(ifelse(choice==0, "no-", ""), item, "_MIDAS"), midas_file)
